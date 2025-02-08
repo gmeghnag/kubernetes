@@ -1,0 +1,35 @@
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+# Frequenza di aggiornamento dello stato del nodo
+nodeStatusUpdateFrequency: 10s
+# Cgroup driver (compatibile con systemd)
+cgroupDriver: systemd
+# Eviction thresholds (gestione delle risorse)
+evictionHard:
+  memory.available: "200Mi"
+  nodefs.available: "10%"
+  nodefs.inodesFree: "5%"
+# Configurazione del runtime
+containerRuntimeEndpoint: "unix:///run/containerd/containerd.sock"
+# Network Plugin (CNI)
+networkPlugin: "cni"
+cniConfDir: "/etc/cni/net.d"
+cniBinDir: "/opt/cni/bin"
+# File di configurazione del kubelet
+authentication:
+  anonymous:
+    enabled: false
+  webhook:
+    enabled: true
+  x509:
+    clientCAFile: "/etc/kubernetes/pki/ca.crt"
+authorization:
+  mode: Webhook
+# Configurazione TLS per il kubelet
+tlsCertFile: "/etc/kubernetes/pki/kubelet.crt"
+tlsPrivateKeyFile: "/etc/kubernetes/pki/kubelet.key"
+# Path per la directory dei pod
+staticPodPath: "/etc/kubernetes/manifests"
+# Feature gates (opzionale, per abilitare funzionalità sperimentali)
+featureGates:
+  RotateKubeletServerCertificate: true
