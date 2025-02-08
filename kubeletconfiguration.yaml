@@ -6,7 +6,7 @@ evictionHard:
   memory.available: "200Mi"
   nodefs.available: "10%"
   nodefs.inodesFree: "5%"
-containerRuntimeEndpoint: "unix:///run/containerd/containerd.sock"
+containerRuntimeEndpoint: "unix:///run/crio/crio.sock"
 cniConfDir: "/etc/cni/net.d"
 cniBinDir: "/opt/cni/bin"
 authentication:
@@ -25,5 +25,4 @@ eventRecordQPS: 5
 logging:
   verbosity: 2
 resolvConf: "/run/systemd/resolve/resolv.conf"
-cpuManagerPolicy: "static"
 topologyManagerPolicy: "best-effort"
